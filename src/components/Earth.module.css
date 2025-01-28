@@ -1,0 +1,6 @@
+.landColor {
+    background-color: var(--gradient-color-start);
+}
+.seaColor {
+    background-color: var(--neutral-background-weak);
+}
