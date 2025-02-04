@@ -1,7 +1,7 @@
 "use client";
 
 import Globe from "react-globe.gl";
-// import R3fGlobe, { GlobeMethods } from 'r3f-globe';
+import R3fGlobe, { GlobeMethods } from 'r3f-globe';
 // import Globe from 'react-globe';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
@@ -11,8 +11,10 @@ import { MeshLambertMaterial, DoubleSide } from 'three';
 import * as topojson from 'topojson';
 // import * as THREE from 'three';
 // import { GlitchPass } from "three/addons/postprocessing/GlitchPass.js";
+// import { UnrealBloomPass } from '@/effects/UnrealBloomPass';
 import PostProcessingEffects from '@/components/Effects';
-import { useMediaQuery } from "@/app/hooks/useMediaQuery";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
+// import styles from "./Earth.module.scss";
 
 
 const landColor = getComputedStyle(document.documentElement).getPropertyValue('--brand-on-background-weak');
@@ -20,33 +22,35 @@ const seaColor = getComputedStyle(document.documentElement).getPropertyValue('--
 
 const polygonsMaterial = new MeshLambertMaterial({ color: landColor, side: DoubleSide });
 const globeMaterial = new MeshLambertMaterial({ color: seaColor });
-// const glitchPass = new GlitchPass(8);
 
-const getTooltip = (d: any) => `
-    <div style="cursor: pointer; text-align: center; background-color: #000; color: #fff; border-radius: 0.5rem; border: 1px solid green; padding: 1rem; text-transform: capitalize; font-size: .8rem;">
-      <div>Probe: ${String(d.id).padStart(4, '0')}</div>
-      <div>Scan data:</div>
-      <div>Status: corrupted</div>
-      <div>loc: <b>${d.city}</b>, ${d.country}</div>
-      <div>time: ${d.datetime}</div>
-    </div>
-  `;
+// const glitchPass = new GlitchPass(5);
+// const unrealBloomPass = new UnrealBloomPass();
+
+// const getTooltip = (d: any) => `
+//     <div style="cursor: pointer; text-align: center; background-color: #000; color: #fff; border-radius: 0.5rem; border: 1px solid green; padding: 1rem; text-transform: capitalize; font-size: .8rem;">
+//       <div>Probe: ${String(d.id).padStart(4, '0')}</div>
+//       <div>Scan data:</div>
+//       <div>Status: corrupted</div>
+//       <div>loc: <b>${d.city}</b>, ${d.country}</div>
+//       <div>time: ${d.datetime}</div>
+//     </div>
+//   `;
 
 
 export const Earth = () => {
 
-  const [globeRadius, setGlobeRadius] = useState();
+  // const [globeRadius, setGlobeRadius] = useState();
 
-  useEffect(() => {
-    globeRef.current.pointOfView(
-      {
-        lat: 51.759445,
-        lng: 19.457216,
-        altitude: 1.8,
-      },
-      5000
-    );
-  }, []);
+  // useEffect(() => {
+  //   globeRef.current.pointOfView(
+  //     {
+  //       lat: 51.759445,
+  //       lng: 19.457216,
+  //       altitude: 1.8,
+  //     },
+  //     5000
+  //   );
+  // }, []);
 
   // const ufoObject = useMemo(() => {
   //   if (!globeRadius) return undefined;
@@ -63,12 +67,17 @@ export const Earth = () => {
   const globeRef = useRef<any>(null!);
 
   // useEffect(() => {
+  //   // unrealBloomPass.strength = 0.1;
+  //   // unrealBloomPass.radius = 0.2;
+  //   // unrealBloomPass.threshold = 0;
   //   if (globeRef.current) {
   //     globeRef.current.postProcessingComposer().addPass(glitchPass);
+  //     // globeRef.current.postProcessingComposer().addPass(unrealBloomPass);
+  //     globeRef.current.controls().enableZoom = false;
   //     const timeout = setTimeout(() => {
   //       globeRef.current.postProcessingComposer().removePass(glitchPass);
   //       return () => clearTimeout(timeout);
-  //     }, 5000);
+  //     }, 6000);
   //   }
   // }, []);
 
@@ -85,8 +94,8 @@ export const Earth = () => {
 
   const matches = useMediaQuery('(max-width: 767px)')
 
-  let globeWidth = matches ? 300 : 500;
-  let globeHeight = matches ? 300 : 500;
+  // let globeWidth = matches ? 300 : 500;
+  // let globeHeight = matches ? 300 : 500;
 
   const lat = 51.759445;
   const lng = 19.457216;
@@ -98,25 +107,25 @@ export const Earth = () => {
     },
   ];
 
-  const gData = useMemo(() => ufosData.map((ufo) => ({
-    lat: ufo.latitude,
-    lng: ufo.longitude,
-    size: Math.random() / 3,
-    // color: ['white', 'green'][Math.round(Math.random() * 3)]
-    color: ['white'][Math.round(Math.random() * 3)]
-  })), [ufosData.length]);
+  // const gData = useMemo(() => ufosData.map((ufo) => ({
+  //   lat: ufo.latitude,
+  //   lng: ufo.longitude,
+  //   size: 0.2,
+  //   // color: ['white', 'green'][Math.round(Math.random() * 3)]
+  //   color: 'white'
+  // })), [ufosData.length]);
 
-  const handleObjectClick = (d: any) => {
-    globeRef.current.pointOfView(
-      {
-        lat: d.latitude,
-        lng: d.longitude,
-        altitude: 1.8,
-      },
-      1000
-    );
-    // globeRef.current.getTooltip();
-  };
+  // const handleObjectClick = (d: any) => {
+  //   globeRef.current.pointOfView(
+  //     {
+  //       lat: d.latitude,
+  //       lng: d.longitude,
+  //       altitude: 1.8,
+  //     },
+  //     1000
+  //   );
+  //   // globeRef.current.getTooltip();
+  // };
 
   // const globeMaterial = new THREE.MeshPhongMaterial();
   //   globeMaterial.bumpScale = 10;
@@ -128,22 +137,27 @@ export const Earth = () => {
 
   return (
     // <Canvas camera={useMemo(() => ({ position: [0, 0, 250] }), [])}>
-    //   <OrbitControls minDistance={101} maxDistance={1e4} dampingFactor={0.1} zoomSpeed={0} rotateSpeed={0.3} />
-    //   <PostProcessingEffects />
-      <Globe
+    <Canvas camera={{ position: [0, 0, 200], rotation: [0, 23.28, 0] } }>
+      <OrbitControls minDistance={101} maxDistance={1e4} dampingFactor={0.1} zoomSpeed={0} rotateSpeed={0.3} />
+      <PostProcessingEffects />
+      <R3fGlobe
         ref={globeRef}
-        backgroundColor="rgba(0,0,0,0)"
         showGlobe={true}
-        atmosphereColor={landColor}
+        // backgroundColor="rgba(0,0,0,0)"
+        waitForGlobeReady={false}
+        showGraticules={true}
+        showAtmosphere={true}
+        atmosphereColor={"lightgreen"}
         atmosphereAltitude={0.10}
         globeMaterial={globeMaterial}
-        width={globeWidth}
-        height={globeHeight}
+        // width={globeWidth}
+        // height={globeHeight}
 
         // globeImageUrl="images/earthspec1k.jpg"
-        pointAltitude="size"
-        pointColor="color"
-        pointsData={ufosData}
+
+        // pointAltitude="size"
+        // pointColor="color"
+        // pointsData={gData}
 
         ringsData={ringsData}
         ringMaxRadius={20}
@@ -159,13 +173,15 @@ export const Earth = () => {
         objectsData={ufosData}
         objectLat={"latitude"}
         objectLng={"longitude"}
-        objectAltitude={0.1}
-        objectLabel={getTooltip}
+        objectAltitude={0.15}
+        // objectLabel={getTooltip}
         // objectThreeObject={ufoObject}
-        onObjectClick={handleObjectClick}
+        // onObjectClick={handleObjectClick}
       />
-    //   <ambientLight intensity={1.5} />
-    //   <directionalLight intensity={0.3 * Math.PI} />
-    // </Canvas>
+    {/* <directionalLight intensity={0.3 * Math.PI} /> */}
+    <directionalLight intensity={2} />
+    <ambientLight intensity={2} />
+    <directionalLight intensity={0.3 * Math.PI} />
+    </Canvas>
   )
 }
