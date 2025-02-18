@@ -73,7 +73,7 @@ export default function ParticlesSetup () {
           "detectsOn": "window",
           "events": {
             "onClick": {
-              "enable": true,
+              "enable": false,
               "mode": "repulse"
             },
             "onDiv": {
@@ -218,7 +218,7 @@ export default function ParticlesSetup () {
                 "value": 1
               }
             },
-            "enable": true,
+            "enable": false,
             "maxSpeed": 50,
             "mode": "bounce",
             "overlap": {
@@ -489,7 +489,7 @@ export default function ParticlesSetup () {
           "orbit": {
             "animation": {
               "count": 0,
-              "enable": false,
+              "enable": true,
               "speed": 1,
               "decay": 0,
               "delay": 0,

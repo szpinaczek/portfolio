@@ -22,11 +22,11 @@ import {
         <EffectComposer>
           {/* <Bloom luminanceThreshold={0.5} luminanceSmoothing={0.5} height={100} /> */}
           {/* <Noise opacity={0.1} /> */}
-          <Scanline
+          {/* <Scanline
             density={2.5}
             opacity={0.2}
             blendFunction={BlendFunction.OVERLAY}
-          />
+          /> */}
           <Glitch
             // @ts-ignore
             delay={[1, 5]}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { Heading, Flex, Text, Button, Avatar, RevealFx, Arrow, Column, GlitchFx, LetterFx } from '@/once-ui/components';
 import { Projects } from '@/components/work/Projects';
@@ -13,6 +13,9 @@ import ParticlesSetup from '@/components/Particles';
 import { Earth } from '@/components/Earth';
 import { EarthDescText } from '@/datasets/texts';
 import TypeAnimationComponent from '@/components/TypeAnimation';
+import classNames from 'classnames';
+import Ufo from '@/components/3D/Ufo';
+import { Canvas } from '@react-three/fiber';
 
 export async function generateMetadata() {
 	const title = home.title;
@@ -100,18 +103,37 @@ export default function Home() {
 				delay={0.5}
 				translateY={0}
 			>
-				<Flex
-					justifyContent="flex-start"
-					alignItems="center"
-					className={styles.earth}
-				>
-					<Earth />
-				</Flex>
+				{/* <Column
+					// maxWidth="s"
+					> */}
+
+				<Earth />
+				{/* <Flex
+						justifyContent="flex-start"
+						alignItems="center"
+						className={styles.earth}
+					>
+						<Text
+							wrap="balance" onSolid="neutral-weak"
+							variant="heading-default-m">
+							Data Container
+						</Text>
+					</Flex> */}
+				{/* </Column> */}
 				<Flex flex={1}
 					paddingLeft="l"
 					alignItems="center"
+				// className={classNames('font-text font-l')}
 				>
-					<TypeAnimationComponent sequence={sequence} />
+					{/* <RevealFx
+						translateY="0" delay={1} fillWidth justifyContent="flex-start" paddingBottom="m"> */}
+					<Text
+						// wrap="balance"
+						// onSolid="neutral-weak"
+						variant="heading-default-m">
+						<TypeAnimationComponent sequence={sequence} />
+					</Text>
+					{/* </RevealFx> */}
 					{/* <LetterFx
 						speed="fast"
 						trigger="instant"
@@ -128,8 +150,12 @@ export default function Home() {
 					<Posts range={[1, 2]} columns="2" />
 				</Flex> */}
 			</RevealFx>
+			{/* <Column
+				fillWidth
+				paddingY="l" gap="m">
 
-
+				<Ufo />
+				</Column> */}
 			<Column
 				fillWidth
 				paddingY="l" gap="m">

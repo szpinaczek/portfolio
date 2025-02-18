@@ -6,6 +6,19 @@
 }
 .earth {
     // transform: rotate(23.26deg);
-    width: 500px;
-    height: 500px;
+    width: 600px;
+    height: 600px;
 }
+.scanInfo {
+    width: 600px;
+    height: auto;
+    justify-content: center;
+    text-align: center;
+}
+.pointer {
+    cursor: pointer;
+}
+
+.multiline {
+    white-space: pre-line;
+ }

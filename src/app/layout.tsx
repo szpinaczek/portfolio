@@ -8,6 +8,7 @@ import { baseURL, effects, style } from '@/app/resources'
 
 import { Inter } from 'next/font/google'
 import { Source_Code_Pro } from 'next/font/google';
+import { Jura } from 'next/font/google';
 
 import { person, home } from '@/app/resources/content';
 import { Background, Flex } from "@/once-ui/components";
@@ -53,7 +54,14 @@ type FontConfig = {
 	Replace with code for secondary and tertiary fonts
 	from https://once-ui.com/customize
 */
-const secondary: FontConfig | undefined = undefined;
+// const secondary: FontConfig | undefined = undefined;
+
+const secondary = Jura({
+	variable: '--font-secondary',
+	subsets: ['latin'],
+	display: 'swap',
+})
+
 const tertiary: FontConfig | undefined = undefined;
 /*
 */

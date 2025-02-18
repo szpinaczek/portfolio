@@ -197,3 +197,13 @@ h1, h2, h3, h4, h5, h6, p {
         line-height: calc(var(--line-height-label-s) * var(--line-height-label-multiplier));
     }
 }
+.font-text {
+    font-family: var(--font-family-text);
+    &.font-default, & > .font-default {
+        font-weight: var(--font-weight-code-default);
+    }
+    &.font-l, & > .font-l {
+        font-size:   calc(var(--font-size-label-l) * var(--font-size-label-multiplier));
+        line-height: calc(var(--line-height-label-l) * var(--line-height-label-multiplier));
+    }
+}

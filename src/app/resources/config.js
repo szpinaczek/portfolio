@@ -45,7 +45,7 @@ const effects = {
         opacity: 50
     },
     dots: {
-        display: true,
+        display: false,
         size: 2,
         color: 'brand-on-background-weak',
         opacity: 20
@@ -63,8 +63,8 @@ const effects = {
 }
 
 const display = {
-    location: true,
-    time:     true
+    location: false,
+    time:     false
 }
 
 const mailchimp = {
